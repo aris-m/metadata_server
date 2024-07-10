@@ -1,6 +1,6 @@
 from django.db import models
 
-class MetaData(models.Model):
+class Metadata(models.Model):
     data_format_choices = [
         ('csv', 'csv'),
         ('xlsx', 'xlsx'),
@@ -18,7 +18,7 @@ class MetaData(models.Model):
     ]
     
     
-    data_provider = models.CharField(max_length=100, strip=True)
-    data_format = models.CharField(max_length=20, strip=True)
+    data_provider = models.CharField(max_length=100)
+    data_format = models.CharField(max_length=20, choices=data_format_choices)
     other_data_format = models.CharField(max_length=20, blank=True, null=True)
-    degree_of_aggregation = models.CharField(max_length=100, strip=True)
+    degree_of_aggregation = models.CharField(max_length=100)
