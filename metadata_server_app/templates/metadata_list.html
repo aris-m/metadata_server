@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Research Metadata Form</title>
+</head>
+<body>
+    <h1>Research Data Metadata List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Data Provider</th>
+                <th>Data Format</th>
+                <th>Other Data Format</th>
+                <th>Degree of Aggregation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for metadata in metadata_list %}
+            <tr>
+                <td>{{ metadata.data_provider }}</td>
+                <td>{{ metadata.data_format }}</td>
+                <td>{{ metadata.other_data_format|default_if_none:'' }}</td>
+                <td>{{ metadata.degree_of_aggregation }}</td>
+                <td><a href="{% url 'download_readme' metadata_id=metadata.id %}">Download README.txt</a></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No entries found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p><a href="{% url 'insert-metadata' %}">Add New Metadata</a></p>
+</body>
+</html>
