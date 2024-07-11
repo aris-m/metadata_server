@@ -200,7 +200,7 @@ urlpatterns = [
 ```
 <p>The Metadata entries are shown as table entries in this page with an additional option to download the metadata entries as a README file. A button is provided at the bottom of the table to add new entries.</p>
 
-## Plugin to download README file with pluggy
+# Plugin to download README file with pluggy
 ```python
 import textwrap
 import pluggy
@@ -237,7 +237,7 @@ def get_plugin_manager():
 <p>A hook specification that takes in an instance of the Metadata class as parameter is created. In the hook implementation the dublin core schema of the specific Metadata instance will be generated. The content of DC.Format will be changed dyanmically according to the data_format. 
   If the value of data_format is 'others' then DC.Format will be set to the value of the other_data_format field</p>
 
-### Add view and url path to call the plugin
+## Add view and url path to call the plugin
 ```python
 urlpatterns = [
     path('', views.list_metadata, name='list-metadata'),
