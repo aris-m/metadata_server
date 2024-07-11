@@ -26,4 +26,4 @@ class Metadata(models.Model):
     
     def clean(self):
         if self.data_format == 'other' and not self.other_data_format:
-            raise ValidationError({'other_data_format': 'This field is required when "Other" is selected.'})
+            raise ValidationError({'other_data_format': 'This field is required when "other" is selected.'})
