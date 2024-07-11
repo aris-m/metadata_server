@@ -1,7 +1,5 @@
 import textwrap
 import pluggy
-from django.http import HttpResponse
-from .models import Metadata
 
 hookspec = pluggy.HookspecMarker("metadata_plugin")
 hookimpl = pluggy.HookimplMarker("metadata_plugin")
@@ -31,14 +29,3 @@ def get_plugin_manager():
     pm.add_hookspecs(MetadataPluginSpec)
     pm.register(MetadataPlugin())
     return pm
-
-def download_readme(request, metadata_id):
-    try:
-        metadata = Metadata.objects.get(id=metadata_id)
-        pm = get_plugin_manager()
-        readme_content = pm.hook.generate_readme(metadata=metadata)[0]
-        response = HttpResponse(readme_content, content_type='text/plain')
-        response['Content-Disposition'] = f'attachment; filename="README_{metadata_id}.txt"'
-        return response
-    except Metadata.DoesNotExist:
-        return HttpResponse("Metadata not found", status=404)
