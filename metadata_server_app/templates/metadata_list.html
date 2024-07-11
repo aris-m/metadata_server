@@ -21,7 +21,6 @@
             <tr>
                 <th>Data Provider</th>
                 <th>Data Format</th>
-                <th>Other Data Format</th>
                 <th>Degree of Aggregation</th>
             </tr>
         </thead>
@@ -29,8 +28,13 @@
             {% for metadata in metadata_list %}
             <tr>
                 <td>{{ metadata.data_provider }}</td>
-                <td>{{ metadata.data_format }}</td>
-                <td>{{ metadata.other_data_format|default_if_none:'' }}</td>
+                <td>
+                    {% if metadata.data_format == 'other' %}
+                        {{ metadata.other_data_format }}
+                    {% else %}
+                        {{ metadata.data_format }}
+                    {% endif %}
+                </td>
                 <td>{{ metadata.degree_of_aggregation }}</td>
                 <td><a href="{% url 'download_readme' metadata_id=metadata.id %}">Download README.txt</a></td>
             </tr>
