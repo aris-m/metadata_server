@@ -22,9 +22,7 @@ def download_readme(request, metadata_id):
     try:
         metadata = Metadata.objects.get(id=metadata_id)
         pm = get_plugin_manager()
-        readme_content = pm.hook.generate_readme(metadata=metadata)[0]
-        response = HttpResponse(readme_content, content_type='text/plain')
-        response['Content-Disposition'] = f'attachment; filename="README_{metadata.data_provider}.txt"'
-        return response
+        generated_readme = pm.hook.generate_readme(metadata=metadata)[0]
+        return generated_readme
     except Metadata.DoesNotExist:
         return HttpResponse("Metadata not found", status=404)
